@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AppService} from "./app.service";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,10 @@ export class AppComponent {
     resolve(42);
   });
   answer: number;
+  beer: any;
+  recherche= false;
 
-  constructor() {
+  constructor(private appService: AppService) {
     this.getAnswerToLifeTheUniverseAndEverythingPromise()
       .then(answer => {
         this.answer = answer;
@@ -25,5 +28,16 @@ export class AppComponent {
 
   getAnswerToLifeTheUniverseAndEverythingPromise(): Promise<number>{
     return this.promise;
+  }
+
+  getRandomBeer() {
+    this.recherche = true;
+    this.beer = undefined;
+    this.appService.getRandomBeer()
+      .subscribe(result => {
+        console.log(result['data']);
+        this.beer = result['data'];
+        this.recherche = false;
+      })
   }
 }

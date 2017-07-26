@@ -5,5 +5,14 @@
   </h1>
   <h2>answer : {{answer}}</h2>
   <img src="http://noconsulting.fr/logo.png">
+
+  <button (click)="getRandomBeer()">Commander une bière</button>
+  <div *ngIf="recherche">Recherche...</div>
+  <div *ngIf="beer !== undefined">
+    <h3>Bière : {{beer.name}} ({{beer.abv}}°)</h3>
+    <div>{{beer.description}}</div>
+    <img *ngIf="beer.labels" src="{{beer.labels.large}}" >
+    <img *ngIf="!beer.labels" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAP7xrNQNhPxI1twqlbsVG2EOGNZwIcvKZzAFMUu4y2t3KVvFdssRecEburg" height="400">
+  </div>
 </div>
 
